@@ -10,7 +10,9 @@ services:
     environment:
       - DB_HOST=db
     volumes:
-      - .:/usr/app
+      - node:/usr/app
+    networks:
+      - node-challenge-networks
 
   nginx:
     build: ./nginx
@@ -37,3 +39,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./mysqldata:/var/lib/mysql
+    networks:
+      - node-challenge-networks
+
+volumes:
+  node:
+
+networks:
+  node-challenge-networks:
+    driver: bridge
